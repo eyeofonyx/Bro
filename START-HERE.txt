@@ -1,0 +1,31 @@
+# Browser-only GitHub Pages export
+
+## On iPad
+
+1. In this app, open Setup and choose Download website ZIP.
+2. In Files, tap the downloaded ZIP to extract it. These are website files, not a game.
+3. Upload the extracted contents into your GitHub repository's root, preserving all directories. The repository must be eligible for GitHub Pages under your GitHub plan. Do not upload only the ZIP: GitHub does not extract it into a website. A folder-capable upload/editor may be necessary; mobile upload interfaces that flatten folders cannot deploy this export. Safari's Request Desktop Website may help with GitHub's settings but does not guarantee folder upload support.
+4. In repository Settings → Pages → Build and deployment, choose Deploy from a branch, the branch containing the website (usually main), and /(root). Save. Wait until GitHub supplies a live URL.
+5. Open that HTTPS URL directly in Safari, not inside another site's embedded viewer or from a local file in Files.
+6. The first visit attempts browser-memory setup and can refresh once. Then open Setup. “Shared memory ready” removes one browser blocker, not all runtime requirements and not game verification. The detailed engine card lists other requirements. A failure stops automatic refreshes and offers a manual retry.
+7. Only after the browser checks pass, select your own local, uncompressed Mario Kart Wii ISO. Do not upload the ISO, keys, saves or Nintendo files to GitHub.
+
+No standalone URL is created by exporting. Creating a GitHub repository or deploying it is a separate user action. Publishing the Maypop app does not publish a GitHub Pages site.
+
+## Rebuild
+
+- `pnpm build:pages`: builds the standalone site in `dist-pages` with relative asset paths, including worker and engine URLs, so project/repository subpaths work.
+- `pnpm export:pages`: refreshes the corresponding-source archive, builds the standalone site and creates `public/downloads/github-pages.zip`. The ZIP contains the ready-to-host site's root, a `.nojekyll` marker and `START-HERE.txt`.
+- `pnpm build`: builds the Maypop version; the memory helper is not registered in this version or in an iframe.
+
+The ZIP does not include a copy of itself. The GPL wrapper source archive is included, as are upstream source links and MIT helper notices. No dependencies must be installed on the iPad to open the published website.
+
+## Scope and limitations
+
+The vendored, unmodified coi-serviceworker v0.1.7 is pinned to commit 7b1d2a092d0d2dd2b7270b6f12f13605de26f214. Its service-worker branch adds COOP/COEP headers to responses. App-managed registration is limited to the standalone site's directory. It does not affect Maypop, bypass iframe ancestor restrictions, cache files for offline use, or upload ISO content. Its operation depends on browser support and hosting conditions. Registration is bounded to 8 seconds; automatic refresh is bounded by a URL marker even if browser storage is unavailable.
+
+The check measures `crossOriginIsolated` and SharedArrayBuffer after refresh, not just whether registration succeeded. Private browsing or browser restrictions can prevent operation. ~1.5 GB shared working memory, Wasm SIMD and worker-based rendering are separate emulator requirements. Desktop Chromium verification is not physical iPad Safari verification. Full Mario Kart Wii boot, racing, audio, save behavior and iPad performance remain unverified.
+
+References:
+- https://github.com/gzuidhof/coi-serviceworker
+- https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site

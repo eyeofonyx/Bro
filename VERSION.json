@@ -1,0 +1,9 @@
+{
+  "project": "wasm-dolphin",
+  "version": "v0.1.1",
+  "commit": "72759cbb512b9a8e3aaaae3b6617bf28a61d3a65",
+  "wasmSha256": "3b2ed6fe35ff1939e24bbe033edba34b9585f4f7b1f457f1e683ed8ddbd005d0",
+  "license": "GPL-2.0-or-later",
+  "upstream": "https://github.com/dougchansan/wasm-dolphin",
+  "correspondingSource": "https://github.com/dougchansan/wasm-dolphin/releases/download/v0.1.1/wasm-dolphin-corresponding-source-v0.1.1.tar.gz"
+}
